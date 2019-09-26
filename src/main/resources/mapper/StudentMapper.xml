@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapping.StudentMapper">
+
+    <!--
+    <resultMap id="StudentMap" type="Student">
+        <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="sno"  column="sno" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="sname" column="sname" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="ssex" column="ssex" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    -->
+    <select id="queryById" resultType="Student" parameterType="java.lang.Integer">
+        select * from student where id = #{id}
+    </select>
+
+    <select id="queryByIds" resultType="java.lang.Integer">
+        select count(*) from student where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="Student">
+      insert into student (sno,sname,ssex)
+      value
+      (#{sno},#{sname},#{ssex})
+    </insert>
+
+    <select id="queryByName" resultType="Student" parameterType="java.lang.String">
+        select * from student where sno=#{sno}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from student where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="Student">
+        update student set
+        sno=#{sno},sname=#{sname},ssex=#{ssex}
+        where id=#{id}
+    </update>
+
+</mapper>
