@@ -19,7 +19,7 @@ public class MybatisConfiguration {
     @Resource
     private DataSource dataSource;
 
-    // 资源文件(application.yml文件中mybatis下级资源)读取器
+    /** 资源文件(application.yml文件中mybatis下级资源)读取器 **/
     @Resource
     private MybatisProperties properties;
 
@@ -30,8 +30,10 @@ public class MybatisConfiguration {
     public SqlSessionFactoryBean sqlSessionFactory() {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(this.dataSource);
-        bean.setVfs(SpringBootVFS.class); // 关键，将vfs设置为SpringBootVFS
-        bean.setTypeAliasesPackage(this.properties.getTypeAliasesPackage()); // 既然手动了，别忘了把其他的配置一起加入
+        // 关键，将vfs设置为SpringBootVFS
+        bean.setVfs(SpringBootVFS.class);
+        // 既然手动了，别忘了把其他的配置一起加入
+        bean.setTypeAliasesPackage(this.properties.getTypeAliasesPackage());
         bean.setMapperLocations(this.properties.resolveMapperLocations());
         return bean;
     }

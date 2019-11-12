@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Administrator
+ */
 @Component
 @SpringBootApplication
 public class SpmybatisApplication {
